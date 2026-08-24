@@ -26,7 +26,7 @@ Server mit API-Proxy: http://localhost:5174
 
 Vercel kann:
 1) die statische React-App aus `dist/` hosten  
-2) gleichzeitig die API-Route `/api/forecast` als Serverless Function aus `api/forecast.cjs` ausführen  
+2) gleichzeitig die API-Route `/api/forecast` als Serverless Function aus `api/forecast.js` ausführen  
 
 ### Schritte
 1. Projekt auf GitHub pushen (oder neues Repo anlegen)
