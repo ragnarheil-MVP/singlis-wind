@@ -13,6 +13,7 @@ import {
   formatDayLabel,
   formatFullDate,
   formatHour,
+  formatKnots,
 } from './lib/wind'
 import './index.css'
 
@@ -54,6 +55,25 @@ function Metric({
   )
 }
 
+function WindPill({
+  label,
+  bf,
+  knots,
+}: {
+  label: string
+  bf: number
+  knots: number
+}) {
+  const tone = bfTone(bf)
+  return (
+    <div className={`bf-pill ${tone}`}>
+      <span className="bf-label">{label}</span>
+      <span className="bf-num">{bf} Bf</span>
+      <span className="bf-kn">{formatKnots(knots)} Kn</span>
+    </div>
+  )
+}
+
 function HourRow({ point, index }: { point: ForecastPoint; index: number }) {
   return (
     <article className="hour-row" style={{ animationDelay: `${Math.min(index, 12) * 0.03}s` }}>
@@ -66,14 +86,8 @@ function HourRow({ point, index }: { point: ForecastPoint; index: number }) {
         </div>
       </div>
       <div className="hour-winds">
-        <div className={`bf-pill ${bfTone(point.windBf)}`}>
-          <span className="bf-label">Wind</span>
-          <span className="bf-num">{point.windBf}</span>
-        </div>
-        <div className={`bf-pill ${bfTone(point.gustBf)}`}>
-          <span className="bf-label">Böen</span>
-          <span className="bf-num">{point.gustBf}</span>
-        </div>
+        <WindPill label="Wind" bf={point.windBf} knots={point.windKnots} />
+        <WindPill label="Böen" bf={point.gustBf} knots={point.gustKnots} />
       </div>
     </article>
   )
@@ -137,14 +151,14 @@ export default function App() {
               label="Wind"
               value={now.windBf}
               unit="Bf"
-              sub={beaufortLabel(now.windBf)}
+              sub={`${formatKnots(now.windKnots)} Kn · ${beaufortLabel(now.windBf)}`}
               tone={bfTone(now.windBf)}
             />
             <Metric
               label="Böen"
               value={now.gustBf}
               unit="Bf"
-              sub={beaufortLabel(now.gustBf)}
+              sub={`${formatKnots(now.gustKnots)} Kn · ${beaufortLabel(now.gustBf)}`}
               tone={bfTone(now.gustBf)}
             />
           </section>
@@ -177,6 +191,7 @@ export default function App() {
                 <span className={`peak ${bfTone(day.summary.maxWindBf)}`}>
                   {day.summary.maxWindBf} Bf
                 </span>
+                <span className="peak-kn">{formatKnots(day.summary.maxWindKnots)} Kn</span>
                 <span className="range">
                   {Math.round(day.summary.minTemp)}–{Math.round(day.summary.maxTemp)}°
                 </span>
@@ -187,8 +202,9 @@ export default function App() {
           <div className="day-heading">
             <h3>{formatFullDate(activeDay.date)}</h3>
             <p>
-              Max Wind {activeDay.summary.maxWindBf} Bf · Böen bis {activeDay.summary.maxGustBf}{' '}
-              Bf
+              Max Wind {activeDay.summary.maxWindBf} Bf ({formatKnots(activeDay.summary.maxWindKnots)}{' '}
+              Kn) · Böen bis {activeDay.summary.maxGustBf} Bf (
+              {formatKnots(activeDay.summary.maxGustKnots)} Kn)
             </p>
           </div>
 
@@ -199,7 +215,7 @@ export default function App() {
           </div>
 
           <p className="footer-note">
-            Daten von Windguru (GFS). Wind & Böen in Beaufort, umgerechnet aus Knoten.
+            Daten von Windguru (GFS). Wind & Böen in Beaufort und Knoten (Kn).
             {state.data.updatedAt ? ` Stand Modell: ${state.data.updatedAt}` : null}
           </p>
         </section>

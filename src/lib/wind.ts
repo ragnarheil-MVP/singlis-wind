@@ -96,3 +96,10 @@ export function bfTone(bf: number): string {
   if (bf <= 7) return 'tone-strong'
   return 'tone-storm'
 }
+
+/** Format knot values (Windguru source unit). */
+export function formatKnots(knots: number): string {
+  const k = Math.max(0, knots)
+  const rounded = Math.round(k * 10) / 10
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1)
+}

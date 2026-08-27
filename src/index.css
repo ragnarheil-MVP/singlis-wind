@@ -309,6 +309,15 @@ button {
   font-weight: 600;
 }
 
+.day-tab .peak-kn {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-top: 0.05rem;
+}
+
 .day-tab .range {
   display: block;
   margin-top: 0.15rem;
@@ -404,7 +413,7 @@ button {
 }
 
 .bf-pill {
-  min-width: 3.35rem;
+  min-width: 3.55rem;
   padding: 0.35rem 0.4rem;
   border-radius: 10px;
   text-align: center;
@@ -417,14 +426,25 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.12rem;
 }
 
 .bf-pill .bf-num {
+  display: block;
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 1rem;
-  line-height: 1;
+  font-size: 0.92rem;
+  line-height: 1.15;
+}
+
+.bf-pill .bf-kn {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.72rem;
+  line-height: 1.1;
+  color: var(--muted);
+  margin-top: 0.12rem;
 }
 
 .tone-calm .bf-num {
@@ -441,6 +461,22 @@ button {
 }
 .tone-storm .bf-num {
   color: var(--storm);
+}
+
+.tone-calm .bf-kn {
+  color: rgba(126, 200, 196, 0.85);
+}
+.tone-light .bf-kn {
+  color: rgba(110, 184, 212, 0.85);
+}
+.tone-fresh .bf-kn {
+  color: rgba(240, 163, 94, 0.9);
+}
+.tone-strong .bf-kn {
+  color: rgba(239, 123, 74, 0.9);
+}
+.tone-storm .bf-kn {
+  color: rgba(226, 77, 92, 0.95);
 }
 
 .status {
@@ -532,6 +568,7 @@ button {
   }
 
   .bf-pill {
-    min-width: 2.9rem;
+    min-width: 3.1rem;
+    padding: 0.32rem 0.3rem;
   }
 }

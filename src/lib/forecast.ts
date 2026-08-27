@@ -123,17 +123,28 @@ export function nearestPoint(points: ForecastPoint[], now = new Date()): Forecas
 
 export function daySummary(points: ForecastPoint[]) {
   if (!points.length) {
-    return { minTemp: 0, maxTemp: 0, maxWindBf: 0, maxGustBf: 0 }
+    return {
+      minTemp: 0,
+      maxTemp: 0,
+      maxWindBf: 0,
+      maxGustBf: 0,
+      maxWindKnots: 0,
+      maxGustKnots: 0,
+    }
   }
   let minTemp = points[0].temperatureC
   let maxTemp = points[0].temperatureC
   let maxWindBf = points[0].windBf
   let maxGustBf = points[0].gustBf
+  let maxWindKnots = points[0].windKnots
+  let maxGustKnots = points[0].gustKnots
   for (const p of points) {
     minTemp = Math.min(minTemp, p.temperatureC)
     maxTemp = Math.max(maxTemp, p.temperatureC)
     maxWindBf = Math.max(maxWindBf, p.windBf)
     maxGustBf = Math.max(maxGustBf, p.gustBf)
+    maxWindKnots = Math.max(maxWindKnots, p.windKnots)
+    maxGustKnots = Math.max(maxGustKnots, p.gustKnots)
   }
-  return { minTemp, maxTemp, maxWindBf, maxGustBf }
+  return { minTemp, maxTemp, maxWindBf, maxGustBf, maxWindKnots, maxGustKnots }
 }
