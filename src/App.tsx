@@ -11,6 +11,7 @@ import {
   bfTone,
   directionToCardinal,
   formatDayLabel,
+  formatCalendarDate,
   formatFullDate,
   formatHour,
   formatKnots,
@@ -188,6 +189,7 @@ export default function App() {
                 onClick={() => setSelectedKey(day.key)}
               >
                 <span className="dow">{formatDayLabel(day.date)}</span>
+                <span className="day-date">{formatCalendarDate(day.date)}</span>
                 <span className={`peak ${bfTone(day.summary.maxWindBf)}`}>
                   {day.summary.maxWindBf} Bf
                 </span>
@@ -220,6 +222,11 @@ export default function App() {
           </p>
         </section>
       ) : null}
+
+      <footer className="site-footer">
+        Kontakt & Feedback: Ragnar Heil,{' '}
+        <a href="mailto:ragnar@ragnarheil.de">ragnar@ragnarheil.de</a>
+      </footer>
     </main>
   )
 }

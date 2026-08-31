@@ -80,6 +80,15 @@ export function formatFullDate(date: Date): string {
   }).format(date)
 }
 
+/** Short calendar date for day tabs, e.g. "31.08." */
+export function formatCalendarDate(date: Date): string {
+  return new Intl.DateTimeFormat('de-DE', {
+    timeZone: BERLIN,
+    day: '2-digit',
+    month: '2-digit',
+  }).format(date)
+}
+
 export function formatHour(date: Date): string {
   return new Intl.DateTimeFormat('de-DE', {
     timeZone: BERLIN,

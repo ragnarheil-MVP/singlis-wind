@@ -303,6 +303,18 @@ button {
   color: var(--brand);
 }
 
+.day-tab .day-date {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.day-tab.active .day-date {
+  color: rgba(94, 200, 192, 0.85);
+}
+
 .day-tab .peak {
   font-family: var(--font-mono);
   font-size: 0.95rem;
@@ -537,6 +549,25 @@ button {
   font-size: 0.75rem;
   color: var(--muted);
   line-height: 1.45;
+}
+
+.site-footer {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.site-footer a {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
