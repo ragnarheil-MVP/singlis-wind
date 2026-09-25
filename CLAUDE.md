@@ -34,13 +34,13 @@ npm run serve
 
 ### Dual API Implementation
 
-This project maintains **three separate implementations** of the same Windguru API proxy for different deployment contexts:
+This project exposes the same Windguru API proxy in **three deployment contexts**, each a thin adapter over the shared fetch logic in **`shared/windguru.js`** (`fetchWindguruForecast()`, spot/model constants, request headers):
 
 1. **`vite.config.ts`** - Vite plugin for local development (`npm run dev`)
 2. **`server/index.js`** - Express server for self-hosted production (`npm run serve`)
 3. **`api/forecast.js`** - Vercel serverless function for Vercel deployment
 
-All three fetch from `https://www.windguru.net/int/iapi.php?q=forecast&id_spot=128495&id_model=3` with identical headers. When modifying the API logic, update all three files.
+All three call `fetchWindguruForecast()` from `shared/windguru.js` and only differ in how they shape the HTTP response (raw Node response, Express `res.json`, or a Fetch `Response` with Vercel's edge-cache header). When modifying the Windguru fetch/URL/headers, edit `shared/windguru.js` only; the three adapters need no changes unless the response-shaping itself changes.
 
 ### Data Flow
 
